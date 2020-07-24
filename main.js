@@ -2,8 +2,8 @@ const black = "●";
 const white = "◯";
 let table = [];
 let tableid = [];
-let oppositeColor;
 let turn = 1;
+let oppositeColor;
 let whichTurn = document.getElementById("p");
 for (let i = 0; i < 8; i++) {
     tableid[i] = [, , , , , , ,];
@@ -15,7 +15,6 @@ for (let i = 0; i < 8; i++) {
 }
 
 window.onload = initialize();
-
 game();
 
 
@@ -23,182 +22,164 @@ game();
 
 function initialize() {
 
-    table[3][3].innerHTML = black;
-    table[3][4].innerHTML = white;
-    table[4][4].innerHTML = black;
-    table[4][3].innerHTML = white;
+    tableid[3][3].innerHTML = black;
+    tableid[3][4].innerHTML = white;
+    tableid[4][4].innerHTML = black;
+    tableid[4][3].innerHTML = white;
 
 }
 
 
 function player(color) {
 
+    for (let i = 0; i < 8; i++) {
+        for (let j = 0; j < 8; j++) {
+            table[i][j] = document.getElementById(`${i}${j}`).textContent;
+            tableid[i][j] = document.getElementById(`${i}${j}`);
+        }
+    }
 
-    let check = 0;
+
     if (color === black) {
         oppositeColor = white;
     } else {
         oppositeColor = black;
     }
+
+
     whichTurn.innerHTML = `${color}の番です。`;
-    console.log(color);
-    console.log(table[-1]);
-    console.log(oppositeColor)
+
     for (let i = 0; i < 8; i++) {
-        console.log("a")
         for (let j = 0; j < 8; j++) {
-            console.log(table[3][3] === oppositeColor)
-            if (table[i + 1][j] === oppositeColor) {
-                console.log("a")
-                for (let k = 2; k < 8 - i; k++) {
-                    console.log(table[4][3] === color)
-                    if (table[i + k][j] === color) {
-                        console.log("a")
-                        tableid[i][j].onclick = function () {
-                            tableid[i][j].innerHTML = color;
-                            console.log("a")
-                            for (let l = 1; l < k; l++) {
-                                tableid[i + k - l][j].innerHTML = color;
-                                console.log("konnnitiha")
+            let check = 0;
+            if (table[i][j] === "") {
+                tableid[i][j].onclick = function () {
+                    console.log("オンクリック")
+                    if (i <= 5 && table[i + 1][j] === oppositeColor) {
+                        for (let k = 2; k < 8 - i; k++) {
+
+
+                            if (table[i + k][j] === color) {
+
+                                tableid[i][j].innerHTML = color;
+                                console.log("描画")
+                                for (let l = 1; l < k; l++) {
+                                    tableid[i + k - l][j].innerHTML = color;
+                                }
+
+                                check++;
+                                break;
                             }
-                            turn = turn * (-1);
-                            game();
                         }
-                        check++;
-                        break;
+                    }
+                    if (i >= 2 && table[i - 1][j] === oppositeColor) {
+                        for (let k = 2; k < i + 1; k++) {
+                            if (table[i - k][j] === color) {
+
+                                tableid[i][j].innerHTML = color;
+                                console.log("描画")
+                                for (let l = 1; l < k; l++) {
+                                    tableid[i - k + l][j].innerHTML = color;
+
+                                }
+                                check++;
+                                break;
+
+                            }
+                        }
+                    }
+                    if (j <= 5 && table[i][j + 1] === oppositeColor) {
+                        for (let k = 2; k < 8 - j; k++) {
+                            if (table[i][j + k] === color) {
+                                tableid[i][j].innerHTML = color;
+                                console.log("描画")
+                                for (let l = 1; l < k; l++) {
+                                    tableid[i][j + k - l].innerHTML = color;
+                                }
+                                check++;
+
+                                break;
+                            }
+                        }
+                    }
+                    if (j >= 2 && table[i][j - 1] === oppositeColor) {
+                        for (let k = 2; k < j + 1; k++) {
+                            if (table[i][j - k] === color) {
+                                tableid[i][j].innerHTML = color;
+                                console.log("描画")
+                                for (let l = 1; l < k; l++) {
+                                    tableid[i][j - k + l].innerHTML = color;
+                                }
+                                check++;
+
+                                break;
+                            }
+                        }
+                    }
+                    if (i <= 5 && j <= 5 && table[i + 1][j + 1] === oppositeColor) {
+                        for (let k = 2; k < Math.min(8 - i, 8 - j); k++) {
+                            if (table[i + k][j + k] === color) {
+                                tableid[i][j].innerHTML = color;
+                                console.log("描画")
+                                for (let l = 1; l < k; l++) {
+                                    tableid[i + k - l][j + k - l].innerHTML = color;
+                                }
+                                check++;
+
+                                break;
+                            }
+                        }
+                    }
+                    if (i <= 5 && j >= 2 && table[i + 1][j - 1] === oppositeColor) {
+                        for (let k = 2; k < Math.min(8 - i, j + 1); k++) {
+                            if (table[i + k][j - k] === color) {
+                                tableid[i][j].innerHTML = color;
+                                console.log("描画")
+                                for (let l = 1; l < k; l++) {
+                                    tableid[i + k - l][j - k + l].innerHTML = color;
+                                }
+                                check++;
+
+                                break;
+                            }
+                        }
+                    }
+                    if (i >= 2 && j <= 5 && table[i - 1][j + 1] === oppositeColor) {
+                        for (let k = 2; k < Math.min(i + 1, 8 - j); k++) {
+                            if (table[i - k][j + k] === color) {
+                                tableid[i][j].innerHTML = color;
+                                console.log("描画")
+                                for (let l = 1; l < k; l++) {
+                                    tableid[i - k + l][j + k - l].innerHTML = color;
+                                }
+                                check++;
+
+                                break;
+                            }
+                        }
+                    }
+                    if (i >= 2 && j >= 2 && table[i - 1][j - 1] === oppositeColor) {
+                        for (let k = 2; k < Math.min(i, j) + 1; k++) {
+                            if (table[i - k][j - k] === color) {
+                                tableid[i][j].innerHTML = color;
+                                for (let l = 1; l < k; l++) {
+                                    tableid[i - k + l][j - k + l].innerHTML = color;
+                                }
+                                check++;
+
+                                break;
+                            }
+                        }
+                    }
+                    if (check === 0) {
+                        alert("だめです");
+                    } else {
+                        turn = -turn;
+                        console.log("ゲーム")
+                        game();
                     }
                 }
-            }
-            console.log(check);
-
-            if (table[i - 1][j] === oppositeColor) {
-                for (let k = 2; k < 8 - i; k++) {
-                    if (table[i - k][j] === color) {
-                        tableid[i][j].onclick = function () {
-                            tableid[i][j].innerHTML = color;
-
-                            for (let l = 1; l < k; l++) {
-                                tableid[i - k + l][j].innerHTML = color;
-
-                            }
-                            turn = -turn;
-                            game();
-                        }
-                        check++;
-                        break;
-
-                    }
-                }
-            }
-            if (table[i][j + 1] === oppositeColor) {
-                for (let k = 2; k < 8 - i; k++) {
-                    if (table[i][j + k] === color) {
-                        tableid[i][j].onclick = function () {
-                            tableid[i][j].innerHTML = color;
-
-                            for (let l = 1; l < k; l++) {
-                                tableid[i][j + k - l].innerHTML = color;
-                            }
-                            turn = turn * (-1);
-                            game();
-                        }
-                        check++;
-
-                        break;
-                    }
-                }
-            }
-            if (table[i][j - 1] === oppositeColor) {
-                for (let k = 2; k < 8 - i; k++) {
-                    if (table[i][j - k] === color) {
-                        tableid[i][j].onclick = function () {
-                            tableid[i][j].innerHTML = color;
-
-                            for (let l = 1; l < k; l++) {
-                                tableid[i][j - k + l].innerHTML = color;
-                            }
-                            turn = turn * (-1);
-                            game();
-                        }
-                        check++;
-
-                        break;
-                    }
-                }
-            }
-            if (table[i + 1][j + 1] === oppositeColor) {
-                for (let k = 2; k < 8 - i; k++) {
-                    if (table[i + k][j + k] === color) {
-                        tableid[i][j].onclick = function () {
-                            tableid[i][j].innerHTML = color;
-
-                            for (let l = 1; l < k; l++) {
-                                tableid[i + k - l][j + k - l].innerHTML = color;
-                            }
-                            turn = turn * (-1);
-                            game();
-                        }
-                        check++;
-
-                        break;
-                    }
-                }
-            }
-            if (table[i + 1][j - 1] === oppositeColor) {
-                for (let k = 2; k < 8 - i; k++) {
-                    if (table[i + k][j - k] === color) {
-                        tableid[i][j].onclick = function () {
-                            tableid[i][j].innerHTML = color;
-
-                            for (let l = 1; l < k; l++) {
-                                tableid[i + k - l][j - k + l].innerHTML = color;
-                            }
-                            turn = turn * (-1);
-                            game();
-                        }
-                        check++;
-
-                        break;
-                    }
-                }
-            }
-            if (table[i - 1][j + 1] === oppositeColor) {
-                for (let k = 2; k < 8 - i; k++) {
-                    if (table[i - k][j + k] === color) {
-                        tableid[i][j].onclick = function () {
-                            tableid[i][j].innerHTML = color;
-
-                            for (let l = 1; l < k; l++) {
-                                tableid[i - k + l][j + k - l].innerHTML = color;
-                            }
-                            turn = turn * (-1);
-                            game();
-                        }
-                        check++;
-
-                        break;
-                    }
-                }
-            }
-            if (table[i - 1][j - 1] === oppositeColor) {
-                for (let k = 2; k < 8 - i; k++) {
-                    if (table[i - k][j - k] === color) {
-                        tableid[i][j].onclick = function () {
-                            tableid[i][j].innerHTML = color;
-
-                            for (let l = 1; l < k; l++) {
-                                tableid[i - k + l][j - k + l].innerHTML = color;
-                            }
-                            turn = turn * (-1);
-                            game();
-                        }
-                        check++;
-
-                        break;
-                    }
-                }
-            }
-            if (check === 0) {
+            } else {
                 tableid[i][j].onclick = function () { alert("だめです"); }
             }
         }
@@ -206,10 +187,144 @@ function player(color) {
 }
 
 function game() {
+    if (judge(white) === true || judge(black) === true) {
 
-    if (turn === 1) {
-        player(black);
+        if (turn === 1) {
+            if (judge(black) === true) {
+                console.log("プレイヤー黒")
+                player(black);
+            } else {
+                console.log("黒pass")
+                pass();
+            }
+        } else {
+            if (judge(white) === true) {
+                console.log("プレイヤー白")
+                player(white);
+            } else {
+                console.log("白pass")
+                pass();
+            }
+        }
+
     } else {
-        player(white);
+        gameEnd();
+    }
+}
+
+function judge(color) {
+    let okerubasyo = 0;
+    if (color === black) {
+        oppositeColor = white;
+    } else {
+        oppositeColor = black;
+    }
+    for (let i = 0; i < 8; i++) {
+        for (let j = 0; j < 8; j++) {
+            table[i][j] = document.getElementById(`${i}${j}`).textContent;
+            tableid[i][j] = document.getElementById(`${i}${j}`);
+
+            if (table[i][j] === "") {
+                if (i <= 5 && table[i + 1][j] === oppositeColor) {
+                    for (let k = 2; k < 8 - i; k++) {
+                        if (table[i + k][j] === color) {
+                            okerubasyo++;
+                        }
+                    }
+                }
+
+                if (i >= 2 && table[i - 1][j] === oppositeColor) {
+                    for (let k = 2; k < i + 1; k++) {
+                        if (table[i - k][j] === color) {
+                            okerubasyo++;
+                        }
+                    }
+                }
+
+                if (j <= 5 && table[i][j + 1] === oppositeColor) {
+                    for (let k = 2; k < 8 - j; k++) {
+                        if (table[i][j + k] === color) {
+                            okerubasyo++;
+                        }
+                    }
+                }
+
+                if (j >= 2 && table[i][j - 1] === oppositeColor) {
+                    for (let k = 2; k < j + 1; k++) {
+                        if (table[i][j - k] === color) {
+                            okerubasyo++;
+                        }
+                    }
+                }
+
+                if (i <= 5 && j <= 5 && table[i + 1][j + 1] === oppositeColor) {
+                    for (let k = 2; k < Math.min(8 - i, 8 - j); k++) {
+                        if (table[i + k][j + k] === color) {
+                            okerubasyo++;
+                        }
+                    }
+                }
+
+                if (i <= 5 && j >= 2 && table[i + 1][j - 1] === oppositeColor) {
+                    for (let k = 2; k < Math.min(8 - i, j + 1); k++) {
+                        if (table[i + k][j - k] === color) {
+                            okerubasyo++;
+                        }
+                    }
+                }
+
+                if (i >= 2 && j <= 5 && table[i - 1][j + 1] === oppositeColor) {
+                    for (let k = 2; k < Math.min(i + 1, 8 - j); k++) {
+                        if (table[i - k][j + k] === color) {
+                            okerubasyo++;
+                        }
+                    }
+                }
+
+                if (i >= 2 && j >= 2 && table[i - 1][j - 1] === oppositeColor) {
+                    for (let k = 2; k < Math.min(i, j) + 1; k++) {
+                        if (table[i - k][j - k] === color) {
+                            okerubasyo++;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    if (okerubasyo != 0) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+
+function pass() {
+    alert("パス");
+    turn = -turn;
+    game();
+}
+
+function gameEnd() {
+    let blackCount = 0;
+    let whiteCount = 0;
+    for (let i = 0; i < 8; i++) {
+        for (let j = 0; j < 8; j++) {
+            table[i][j] = document.getElementById(`${i}${j}`).textContent;
+            tableid[i][j] = document.getElementById(`${i}${j}`);
+            if (table[i][j] === black) {
+                blackCount++;
+            } else if (table[i][j] === white) {
+                whiteCount++;
+            }
+        }
+    }
+    if (blackCount > whiteCount) {
+        whichTurn.innerHTML = "黒の勝ち";
+    } else if (whiteCount > blackCount) {
+        whichTurn.innerHTML = "白の勝ち";
+    } else {
+        whichTurn.innerHTML = "引き分け";
     }
 }
