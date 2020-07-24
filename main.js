@@ -301,9 +301,9 @@ function judge(color) {
 
 
 function pass() {
-    alert("パス");
     turn = -turn;
-    game();
+    whichTurn.innerHTML = " <span>パス</span>";
+    setTimeout(game, 4000);
 }
 
 function gameEnd() {
