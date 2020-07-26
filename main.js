@@ -32,7 +32,6 @@ function initialize() {
 
 function player(color) {
 
-
     whichTurn.innerHTML = `${color}の番です。`;
 
     for (let i = 0; i < 8; i++) {
@@ -43,16 +42,12 @@ function player(color) {
                     console.log("オンクリック")
                     if (i <= 5 && table[i + 1][j] === oppositeColor) {
                         for (let k = 2; k < 8 - i; k++) {
-
-
                             if (table[i + k][j] === color) {
-
                                 tableid[i][j].innerHTML = color;
                                 console.log("描画")
                                 for (let l = 1; l < k; l++) {
                                     tableid[i + k - l][j].innerHTML = color;
                                 }
-
                                 check++;
                                 break;
                             }
@@ -61,7 +56,6 @@ function player(color) {
                     if (i >= 2 && table[i - 1][j] === oppositeColor) {
                         for (let k = 2; k < i + 1; k++) {
                             if (table[i - k][j] === color) {
-
                                 tableid[i][j].innerHTML = color;
                                 console.log("描画")
                                 for (let l = 1; l < k; l++) {
@@ -70,7 +64,6 @@ function player(color) {
                                 }
                                 check++;
                                 break;
-
                             }
                         }
                     }
@@ -83,7 +76,6 @@ function player(color) {
                                     tableid[i][j + k - l].innerHTML = color;
                                 }
                                 check++;
-
                                 break;
                             }
                         }
@@ -97,7 +89,6 @@ function player(color) {
                                     tableid[i][j - k + l].innerHTML = color;
                                 }
                                 check++;
-
                                 break;
                             }
                         }
@@ -111,7 +102,6 @@ function player(color) {
                                     tableid[i + k - l][j + k - l].innerHTML = color;
                                 }
                                 check++;
-
                                 break;
                             }
                         }
@@ -125,7 +115,6 @@ function player(color) {
                                     tableid[i + k - l][j - k + l].innerHTML = color;
                                 }
                                 check++;
-
                                 break;
                             }
                         }
@@ -139,7 +128,6 @@ function player(color) {
                                     tableid[i - k + l][j + k - l].innerHTML = color;
                                 }
                                 check++;
-
                                 break;
                             }
                         }
@@ -152,7 +140,6 @@ function player(color) {
                                     tableid[i - k + l][j - k + l].innerHTML = color;
                                 }
                                 check++;
-
                                 break;
                             }
                         }
@@ -173,6 +160,7 @@ function player(color) {
 }
 
 function game() {
+    yomikomi();
     if (judge(white) === true || judge(black) === true) {
 
         if (turn === 1) {
@@ -192,7 +180,6 @@ function game() {
                 pass();
             }
         }
-
     } else {
         gameEnd();
     }
@@ -207,8 +194,6 @@ function judge(color) {
     }
     for (let i = 0; i < 8; i++) {
         for (let j = 0; j < 8; j++) {
-            table[i][j] = document.getElementById(`${i}${j}`).textContent;
-            tableid[i][j] = document.getElementById(`${i}${j}`);
 
             if (table[i][j] === "") {
                 if (i <= 5 && table[i + 1][j] === oppositeColor) {
@@ -310,5 +295,14 @@ function gameEnd() {
         whichTurn.innerHTML = "白の勝ち";
     } else {
         whichTurn.innerHTML = "引き分け";
+    }
+}
+
+function yomikomi() {
+    for (let i = 0; i < 8; i++) {
+        for (let j = 0; j < 8; j++) {
+            table[i][j] = document.getElementById(`${i}${j}`).textContent;
+            tableid[i][j] = document.getElementById(`${i}${j}`);
+        }
     }
 }
