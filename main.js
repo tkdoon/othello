@@ -5,14 +5,7 @@ let tableid = [];
 let turn = 1;
 let oppositeColor;
 let whichTurn = document.getElementById("p");
-for (let i = 0; i < 8; i++) {
-    tableid[i] = [, , , , , , ,];
-    table[i] = [, , , , , , ,];
-    for (let j = 0; j < 8; j++) {
-        table[i][j] = document.getElementById(`${i}${j}`).textContent;
-        tableid[i][j] = document.getElementById(`${i}${j}`);
-    }
-}
+
 
 window.onload = initialize();
 game();
@@ -21,7 +14,14 @@ game();
 
 
 function initialize() {
-
+    for (let i = 0; i < 8; i++) {
+        tableid[i] = [, , , , , , ,];
+        table[i] = [, , , , , , ,];
+        for (let j = 0; j < 8; j++) {
+            table[i][j] = document.getElementById(`${i}${j}`).textContent;
+            tableid[i][j] = document.getElementById(`${i}${j}`);
+        }
+    }
     tableid[3][3].innerHTML = black;
     tableid[3][4].innerHTML = white;
     tableid[4][4].innerHTML = black;
@@ -31,20 +31,6 @@ function initialize() {
 
 
 function player(color) {
-
-    for (let i = 0; i < 8; i++) {
-        for (let j = 0; j < 8; j++) {
-            table[i][j] = document.getElementById(`${i}${j}`).textContent;
-            tableid[i][j] = document.getElementById(`${i}${j}`);
-        }
-    }
-
-
-    if (color === black) {
-        oppositeColor = white;
-    } else {
-        oppositeColor = black;
-    }
 
 
     whichTurn.innerHTML = `${color}の番です。`;
@@ -311,8 +297,6 @@ function gameEnd() {
     let whiteCount = 0;
     for (let i = 0; i < 8; i++) {
         for (let j = 0; j < 8; j++) {
-            table[i][j] = document.getElementById(`${i}${j}`).textContent;
-            tableid[i][j] = document.getElementById(`${i}${j}`);
             if (table[i][j] === black) {
                 blackCount++;
             } else if (table[i][j] === white) {
