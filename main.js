@@ -42,105 +42,137 @@ function player(color) {
                     console.log("オンクリック")
                     if (i <= 5 && table[i + 1][j] === oppositeColor) {
                         for (let k = 2; k < 8 - i; k++) {
-                            if (table[i + k][j] === color) {
-                                tableid[i][j].innerHTML = color;
-                                console.log("描画")
-                                for (let l = 1; l < k; l++) {
-                                    tableid[i + k - l][j].innerHTML = color;
-                                }
-                                check++;
+                            if (table[i + k][j] === "") {
                                 break;
+                            } else {
+                                if (table[i + k][j] === color) {
+                                    tableid[i][j].innerHTML = color;
+                                    console.log("描画")
+                                    for (let l = 1; l < k; l++) {
+                                        tableid[i + k - l][j].innerHTML = color;
+                                    }
+                                    check++;
+                                    break;
+                                }
                             }
                         }
                     }
                     if (i >= 2 && table[i - 1][j] === oppositeColor) {
                         for (let k = 2; k < i + 1; k++) {
-                            if (table[i - k][j] === color) {
-                                tableid[i][j].innerHTML = color;
-                                console.log("描画")
-                                for (let l = 1; l < k; l++) {
-                                    tableid[i - k + l][j].innerHTML = color;
-
-                                }
-                                check++;
+                            if (table[i - k][j] === "") {
                                 break;
+                            } else {
+                                if (table[i - k][j] === color) {
+                                    tableid[i][j].innerHTML = color;
+                                    console.log("描画")
+                                    for (let l = 1; l < k; l++) {
+                                        tableid[i - k + l][j].innerHTML = color;
+
+                                    }
+                                    check++;
+                                    break;
+                                }
                             }
                         }
                     }
                     if (j <= 5 && table[i][j + 1] === oppositeColor) {
                         for (let k = 2; k < 8 - j; k++) {
-                            if (table[i][j + k] === color) {
-                                tableid[i][j].innerHTML = color;
-                                console.log("描画")
-                                for (let l = 1; l < k; l++) {
-                                    tableid[i][j + k - l].innerHTML = color;
-                                }
-                                check++;
+                            if (table[i][j + k] === "") {
                                 break;
+                            } else {
+                                if (table[i][j + k] === color) {
+                                    tableid[i][j].innerHTML = color;
+                                    console.log("描画")
+                                    for (let l = 1; l < k; l++) {
+                                        tableid[i][j + k - l].innerHTML = color;
+                                    }
+                                    check++;
+                                    break;
+                                }
                             }
                         }
                     }
                     if (j >= 2 && table[i][j - 1] === oppositeColor) {
                         for (let k = 2; k < j + 1; k++) {
-                            if (table[i][j - k] === color) {
-                                tableid[i][j].innerHTML = color;
-                                console.log("描画")
-                                for (let l = 1; l < k; l++) {
-                                    tableid[i][j - k + l].innerHTML = color;
-                                }
-                                check++;
+                            if (table[i][j - k] === "") {
                                 break;
+                            } else {
+                                if (table[i][j - k] === color) {
+                                    tableid[i][j].innerHTML = color;
+                                    console.log("描画")
+                                    for (let l = 1; l < k; l++) {
+                                        tableid[i][j - k + l].innerHTML = color;
+                                    }
+                                    check++;
+                                    break;
+                                }
                             }
                         }
                     }
                     if (i <= 5 && j <= 5 && table[i + 1][j + 1] === oppositeColor) {
                         for (let k = 2; k < Math.min(8 - i, 8 - j); k++) {
-                            if (table[i + k][j + k] === color) {
-                                tableid[i][j].innerHTML = color;
-                                console.log("描画")
-                                for (let l = 1; l < k; l++) {
-                                    tableid[i + k - l][j + k - l].innerHTML = color;
-                                }
-                                check++;
+                            if (table[i + k][j + k] === "") {
                                 break;
+                            } else {
+                                if (table[i + k][j + k] === color) {
+                                    tableid[i][j].innerHTML = color;
+                                    console.log("描画")
+                                    for (let l = 1; l < k; l++) {
+                                        tableid[i + k - l][j + k - l].innerHTML = color;
+                                    }
+                                    check++;
+                                    break;
+                                }
                             }
                         }
                     }
                     if (i <= 5 && j >= 2 && table[i + 1][j - 1] === oppositeColor) {
                         for (let k = 2; k < Math.min(8 - i, j + 1); k++) {
-                            if (table[i + k][j - k] === color) {
-                                tableid[i][j].innerHTML = color;
-                                console.log("描画")
-                                for (let l = 1; l < k; l++) {
-                                    tableid[i + k - l][j - k + l].innerHTML = color;
-                                }
-                                check++;
+                            if (table[i + k][j - k] === "") {
                                 break;
+                            } else {
+                                if (table[i + k][j - k] === color) {
+                                    tableid[i][j].innerHTML = color;
+                                    console.log("描画")
+                                    for (let l = 1; l < k; l++) {
+                                        tableid[i + k - l][j - k + l].innerHTML = color;
+                                    }
+                                    check++;
+                                    break;
+                                }
                             }
                         }
                     }
                     if (i >= 2 && j <= 5 && table[i - 1][j + 1] === oppositeColor) {
                         for (let k = 2; k < Math.min(i + 1, 8 - j); k++) {
-                            if (table[i - k][j + k] === color) {
-                                tableid[i][j].innerHTML = color;
-                                console.log("描画")
-                                for (let l = 1; l < k; l++) {
-                                    tableid[i - k + l][j + k - l].innerHTML = color;
-                                }
-                                check++;
+                            if (table[i - k][j + k] === "") {
                                 break;
+                            } else {
+                                if (table[i - k][j + k] === color) {
+                                    tableid[i][j].innerHTML = color;
+                                    console.log("描画")
+                                    for (let l = 1; l < k; l++) {
+                                        tableid[i - k + l][j + k - l].innerHTML = color;
+                                    }
+                                    check++;
+                                    break;
+                                }
                             }
                         }
                     }
                     if (i >= 2 && j >= 2 && table[i - 1][j - 1] === oppositeColor) {
                         for (let k = 2; k < Math.min(i, j) + 1; k++) {
-                            if (table[i - k][j - k] === color) {
-                                tableid[i][j].innerHTML = color;
-                                for (let l = 1; l < k; l++) {
-                                    tableid[i - k + l][j - k + l].innerHTML = color;
-                                }
-                                check++;
+                            if (table[i - k][j - k] === "") {
                                 break;
+                            } else {
+                                if (table[i - k][j - k] === color) {
+                                    tableid[i][j].innerHTML = color;
+                                    for (let l = 1; l < k; l++) {
+                                        tableid[i - k + l][j - k + l].innerHTML = color;
+                                    }
+                                    check++;
+                                    break;
+                                }
                             }
                         }
                     }
