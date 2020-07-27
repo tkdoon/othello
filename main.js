@@ -1,5 +1,5 @@
-const black = "●";
-const white = "◯";
+const black = "⚫";
+const white = "⚪";
 let table = [];
 let tableid = [];
 let turn = 1;
@@ -11,14 +11,13 @@ window.onload = initialize();
 game();
 
 
-
-
 function initialize() {
     for (let i = 0; i < 8; i++) {
         tableid[i] = [, , , , , , ,];
         table[i] = [, , , , , , ,];
         for (let j = 0; j < 8; j++) {
             table[i][j] = document.getElementById(`${i}${j}`).textContent;
+
             tableid[i][j] = document.getElementById(`${i}${j}`);
         }
     }
@@ -26,7 +25,6 @@ function initialize() {
     tableid[3][4].innerHTML = white;
     tableid[4][4].innerHTML = black;
     tableid[4][3].innerHTML = white;
-
 }
 
 
@@ -39,7 +37,6 @@ function player(color) {
             let check = 0;
             if (table[i][j] === "") {
                 tableid[i][j].onclick = function () {
-                    console.log("オンクリック")
                     if (i <= 5 && table[i + 1][j] === oppositeColor) {
                         for (let k = 2; k < 8 - i; k++) {
                             if (table[i + k][j] === "") {
@@ -47,7 +44,6 @@ function player(color) {
                             } else {
                                 if (table[i + k][j] === color) {
                                     tableid[i][j].innerHTML = color;
-                                    console.log("描画")
                                     for (let l = 1; l < k; l++) {
                                         tableid[i + k - l][j].innerHTML = color;
                                     }
@@ -64,7 +60,6 @@ function player(color) {
                             } else {
                                 if (table[i - k][j] === color) {
                                     tableid[i][j].innerHTML = color;
-                                    console.log("描画")
                                     for (let l = 1; l < k; l++) {
                                         tableid[i - k + l][j].innerHTML = color;
 
@@ -82,7 +77,6 @@ function player(color) {
                             } else {
                                 if (table[i][j + k] === color) {
                                     tableid[i][j].innerHTML = color;
-                                    console.log("描画")
                                     for (let l = 1; l < k; l++) {
                                         tableid[i][j + k - l].innerHTML = color;
                                     }
@@ -99,7 +93,6 @@ function player(color) {
                             } else {
                                 if (table[i][j - k] === color) {
                                     tableid[i][j].innerHTML = color;
-                                    console.log("描画")
                                     for (let l = 1; l < k; l++) {
                                         tableid[i][j - k + l].innerHTML = color;
                                     }
@@ -116,7 +109,6 @@ function player(color) {
                             } else {
                                 if (table[i + k][j + k] === color) {
                                     tableid[i][j].innerHTML = color;
-                                    console.log("描画")
                                     for (let l = 1; l < k; l++) {
                                         tableid[i + k - l][j + k - l].innerHTML = color;
                                     }
@@ -133,7 +125,6 @@ function player(color) {
                             } else {
                                 if (table[i + k][j - k] === color) {
                                     tableid[i][j].innerHTML = color;
-                                    console.log("描画")
                                     for (let l = 1; l < k; l++) {
                                         tableid[i + k - l][j - k + l].innerHTML = color;
                                     }
@@ -150,7 +141,6 @@ function player(color) {
                             } else {
                                 if (table[i - k][j + k] === color) {
                                     tableid[i][j].innerHTML = color;
-                                    console.log("描画")
                                     for (let l = 1; l < k; l++) {
                                         tableid[i - k + l][j + k - l].innerHTML = color;
                                     }
@@ -177,15 +167,14 @@ function player(color) {
                         }
                     }
                     if (check === 0) {
-                        alert("だめです");
+                        alert("だめでぇぇぇぇぇぇぇすwwwwwwwwww");
                     } else {
                         turn = -turn;
-                        console.log("ゲーム")
                         game();
                     }
                 }
             } else {
-                tableid[i][j].onclick = function () { alert("だめです"); }
+                tableid[i][j].onclick = function () { alert("だめなんですよぉぉぉぉぉwwwwwwww"); }
             }
         }
     }
@@ -197,18 +186,14 @@ function game() {
 
         if (turn === 1) {
             if (judge(black) === true) {
-                console.log("プレイヤー黒")
                 player(black);
             } else {
-                console.log("黒pass")
                 pass();
             }
         } else {
             if (judge(white) === true) {
-                console.log("プレイヤー白")
                 player(white);
             } else {
-                console.log("白pass")
                 pass();
             }
         }
