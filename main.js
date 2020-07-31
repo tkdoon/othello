@@ -5,7 +5,7 @@ let tableid = [];
 let turn = 1;
 let oppositeColor;
 let whichTurn = document.getElementById("p");
-
+let passMode;
 
 window.onload = initialize();
 game();
@@ -37,6 +37,7 @@ function player(color) {
             let check = 0;
             if (table[i][j] === "") {
                 tableid[i][j].onclick = function () {
+                    if (passMode) { return; }
                     if (i <= 5 && table[i + 1][j] === oppositeColor) {
                         for (let k = 2; k < 8 - i; k++) {
                             if (table[i + k][j] === "") {
@@ -167,14 +168,17 @@ function player(color) {
                         }
                     }
                     if (check === 0) {
-                        alert("だめでぇぇぇぇぇぇぇすwwwwwwwwww");
+                        alert("だめです。");
                     } else {
                         turn = -turn;
                         game();
                     }
                 }
             } else {
-                tableid[i][j].onclick = function () { alert("だめなんですよぉぉぉぉぉwwwwwwww"); }
+                tableid[i][j].onclick = () => {
+                    if (passMode) { return; }
+                    alert("だめです。");
+                }
             }
         }
     }
@@ -289,9 +293,17 @@ function judge(color) {
 
 
 function pass() {
+    passMode = true;
+    for (let i = 0; i < 8; i++) {
+        for (let j = 0; j < 0; j++) {
+        }
+    }
     turn = -turn;
     whichTurn.innerHTML = " <span>パス</span>";
-    setTimeout(game, 4000);
+    setTimeout(() => {
+        passMode = false;
+        game();
+    }, 4000);
 }
 
 function gameEnd() {
